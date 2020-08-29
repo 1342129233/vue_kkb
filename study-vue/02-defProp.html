@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    const obj = {}
+    function defineReactive(obj, key, val) {
+      // 对传入 obj 进行访问拦截
+      Object.defineProperty(obj, key, {
+        get() {
+          console.log('get' + key, val)
+          return val
+        },
+        set(newVal) {
+          if(newVal !== val) {
+            console.log('set' + newVal)
+            val = newVal
+            // 更新函数，这样渲染到页面上
+            update()
+          }
+        }
+      })
+    }
+    // 更新数据
+    function update() {
+      app.innerText = obj.foo
+    }
+    // defineReactive(obj, 'foo', '')
+    // obj.foo = new Date().toLocaleTimeString()
+
+    // setInterval(() => {
+    //   obj.foo = new Date().toLocaleTimeString()
+    // }, 1000)
+  </script>
+</body>
+</html>
