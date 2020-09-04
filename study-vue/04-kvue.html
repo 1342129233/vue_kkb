@@ -7,20 +7,31 @@
 </head>
 <body>
   <div id="app">
-    <p>{{counter}}</p>
-    <p>{{counter}}</p>
+    <!-- 插值 -->
+    <p @click="add">{{counter}}</p>
+    <!-- 指令 -->
+    <p k-text="counter"></p>
+    <p k-html="desc"></p>
+    <input k-model='desc' type="text" />
   </div>
 </body>
+<script src="compile.js"></script>
 <script src="kvue.js"></script>
 <script>
   const app = new kVue({
     el: '#app',
     data: {
-      counter: 1
+      counter: 1,
+      desc: '<span style="color:red">Kvue 可还行</span>'
+    },
+    methods: {
+      add() {
+        this.counter++
+      }
     }
   })
-  setInterval(() => {
-    app.counter++
-  }, 1000)
+  // setInterval(() => {
+  //   app.counter++
+  // }, 1000)
 </script>
 </html>
